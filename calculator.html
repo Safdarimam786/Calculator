@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Calculator</title>
+
+    <style>
+      /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Ubuntu:wght@300&display=swap'); */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+        font-family: "Roboto", sans-serif;
+
+        background: linear-gradient(-45deg, #63a4ff 0%, #83eaf1 100%);
+        background-repeat: no-repeat;
+      }
+
+      .button {
+        background-color: #000;
+        color: #fff;
+        outline: none;
+        font-size: 24px;
+        margin: 0 5px;
+        border: 0.5px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 5px;
+        font-family: "Orbitron", sans-serif;
+        width: 60px;
+        height: 65px;
+        border-radius: 15px 15px 12px 12px;
+        cursor: pointer;
+        position: relative;
+        will-change: transform;
+        transition: all 0.1s ease-in-out 0s;
+        user-select: none;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0)
+          ),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+        background-position: bottom right, bottom right;
+        background-size: 100% 100%, 100% 100%;
+        background-repeat: no-repeat;
+        box-shadow: inset -4px -10px 0px rgba(255, 255, 255, 0.4),
+          inset -4px -8px 0px rgba(0, 0, 0, 0.3), 0px 2px 1px rgba(0, 0, 0, 0.3),
+          0px 2px 1px rgba(255, 255, 255, 0.1);
+        transform: perspective(70px) rotateX(5deg) rotateY(0deg);
+      }
+
+      .button::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-image: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.2),
+          rgba(0, 0, 0, 0.5)
+        );
+        z-index: -1;
+        border-radius: 15px;
+        box-shadow: inset 4px 0px 0px rgba(255, 255, 255, 0.1),
+          inset 4px -8px 0px rgba(0, 0, 0, 0.3);
+        transition: all 0.1s ease-in-out 0s;
+      }
+
+      .button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0)
+          ),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+        background-position: bottom right, bottom right;
+        background-size: 100% 100%, 100% 100%;
+        background-repeat: no-repeat;
+        z-index: -1;
+        border-radius: 15px;
+        transition: all 0.1s ease-in-out 0s;
+      }
+
+      .button:active {
+        will-change: transform;
+        transform: perspective(80px) rotateX(5deg) rotateY(1deg) translateY(3px)
+          scale(0.96);
+        height: 64px;
+        border: 0.25px solid rgba(0, 0, 0, 0.2);
+        box-shadow: inset -4px -8px 0px rgba(255, 255, 255, 0.2),
+          inset -4px -6px 0px rgba(0, 0, 0, 0.8), 0px 1px 0px rgba(0, 0, 0, 0.9),
+          0px 1px 0px rgba(255, 255, 255, 0.2);
+        transition: all 0.1s ease-in-out 0s;
+      }
+
+      .button::after:active {
+        background-image: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.5),
+          rgba(255, 255, 255, 0.2)
+        );
+      }
+
+      .button:active::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 5%;
+        left: 20%;
+        width: 50%;
+        height: 80%;
+        background-color: rgba(255, 255, 255, 0.1);
+        animation: overlay 0.1s ease-in-out 0s;
+        pointer-events: none;
+      }
+
+      @keyframes overlay {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      .button:focus {
+        outline: none;
+      }
+
+      .row {
+        margin: 8px 0;
+      }
+
+      .row input {
+        width: 263px;
+        outline: none;
+        font-size: 24px;
+        font-weight: 800;
+        font-family: "Orbitron", sans-serif;
+        margin: 0;
+        color: #655656;
+        background: linear-gradient(-45deg, #bebebe 0%, #d9d9d9 100%);
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5),
+          inset 5px 5px 8px rgba(0, 0, 0, 0.5);
+        padding: 20px 13px;
+        /* border: 2px solid black; */
+        border-radius: 5px;
+      }
+
+      .container {
+        width: 300px;
+        height: auto;
+        background-color: #000;
+        background: linear-gradient(-45deg, #121212 0%, #3b3b3b 100%);
+        padding: 15px;
+        box-shadow: inset -6px -8px 0px rgba(255, 255, 255, 0.2),
+          inset -4px -6px 0px rgba(0, 0, 0, 0.8), 0px 1px 0px rgba(0, 0, 0, 0.9),
+          0px 1px 0px rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+
+      .wrapper {
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+
+      .text-center {
+        color: #323232;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        font-family: "Orbitron", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <h1 class="text-center">Welcome to Calculator</h1>
+      <div class="container">
+        <div class="row">
+          <input class="input" type="text" />
+        </div>
+        <div class="row">
+          <button class="button">C</button>
+          <button class="button">%</button>
+          <button class="button">M+</button>
+          <button class="button">M-</button>
+        </div>
+        <div class="row">
+          <button class="button">7</button>
+          <button class="button">8</button>
+          <button class="button">9</button>
+          <button class="button">*</button>
+        </div>
+        <div class="row">
+          <button class="button">4</button>
+          <button class="button">5</button>
+          <button class="button">6</button>
+          <button class="button">/</button>
+        </div>
+        <div class="row">
+          <button class="button">1</button>
+          <button class="button">2</button>
+          <button class="button">3</button>
+          <button class="button">+</button>
+        </div>
+        <div class="row">
+          <button class="button">0</button>
+          <button class="button">.</button>
+          <button class="button">=</button>
+          <button class="button">-</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Todo: Make M+ M- and MC functional
+      let string = "";
+      let buttons = document.querySelectorAll(".button");
+      Array.from(buttons).forEach((button) => {
+        button.addEventListener("click", (e) => {
+          if (e.target.innerHTML == "=") {
+            string = eval(string);
+            document.querySelector("input").value = string;
+          } else if (e.target.innerHTML == "C") {
+            string = "";
+            document.querySelector("input").value = string;
+          } else {
+            console.log(e.target);
+            string = string + e.target.innerHTML;
+            document.querySelector("input").value = string;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
