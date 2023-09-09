@@ -1,7 +1,8 @@
 
 #codSoft
+
 Task 2
-GitHub link: 
+GitHub link: https://github.com/Safdarimam786/calculator/tree/main
 
 
 # calculator
