@@ -1,11 +1,13 @@
 
-#codSoft
-
-Task 2
-GitHub link: https://github.com/Safdarimam786/calculator/tree/main
 
 
 # calculator
+
+
+# codSoft
+
+Task 2
+GitHub link: https://github.com/Safdarimam786/calculator/tree/main
 
 
 # Output
