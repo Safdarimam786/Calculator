@@ -4,9 +4,9 @@
 # calculator
 
 
-# codSoft
-
-Task 2
+# CODSOFT
+Level 1
+Task 3
 GitHub link: https://github.com/Safdarimam786/calculator/tree/main
 
 
