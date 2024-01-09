@@ -4,12 +4,6 @@
 # calculator
 
 
-# CODSOFT
-Level 1
-Task 3
-GitHub link: https://github.com/Safdarimam786/calculator/tree/main
-
-
 # Output
 
 ![calculator](https://github.com/Safdarimam786/calculator/assets/105650552/67991ffc-15d5-4161-bc8a-4e9be63f917f)
